@@ -13,18 +13,25 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.ceiba.test.domain.post.model.Post
 import com.ceiba.test.domain.user.model.User
+import com.ceiba.test.postuser.common.view.EmptyList
 import com.ceiba.test.postuser.ui.theme.Green700
 import com.ceiba.test.postuser.ui.theme.PostUserTheme
 import com.ceiba.test.postuser.user.ui.theme.multiplierX4
 import com.ceiba.test.postuser.user.view.User
 
 @Composable
-fun Posts(user: User, posts: List<Post>) {
+fun Posts(user: User, posts: List<Post>, updateList: () -> Unit) {
     LazyColumn {
         item {
             User(user = user, showCallToAction = false)
         }
-        items(posts) { post -> Post(post = post) }
+        if (posts.isEmpty()) {
+            item {
+                EmptyList(callToAction = updateList)
+            }
+        } else {
+            items(posts) { post -> Post(post = post) }
+        }
     }
 }
 
@@ -72,6 +79,6 @@ private fun PostPreview() {
             """.trimIndent()
             )
         )
-        Posts(user = user, posts = posts)
+        Posts(user = user, posts = posts, updateList = {})
     }
 }
