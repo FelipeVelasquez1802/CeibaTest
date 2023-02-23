@@ -1,17 +1,25 @@
 package com.ceiba.test.domain.user.model
 
 import com.ceiba.test.domain.exception.BadEmailException
+import com.ceiba.test.domain.exception.BadIdException
 import com.ceiba.test.domain.exception.EmptyValueException
 
-class User(val name: String, val email: String, val phone: String) {
+class User(val id: Int, val name: String, val email: String, val phone: String) {
     init {
         validations()
     }
 
     private fun validations() {
+        validateId()
         validateName()
         validateEmail()
         validatePhone()
+    }
+
+    private fun validateId() {
+        if (id <= 0) {
+            throw BadIdException()
+        }
     }
 
     private fun validateName() {

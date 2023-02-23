@@ -3,18 +3,39 @@ package com.ceiba.test.postuser.user.activity
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
+import androidx.compose.material.TextField
+import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.runtime.toMutableStateList
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.ceiba.test.domain.user.model.User
+import com.ceiba.test.postuser.common.view.Loading
 import com.ceiba.test.postuser.ui.theme.PostUserTheme
+import com.ceiba.test.postuser.user.ui.theme.multiplierX8
+import com.ceiba.test.postuser.user.view.Users
+import com.ceiba.test.postuser.user.viewmodel.UserViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+
+    private val userViewModel: UserViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        userViewModel.executeGetUser()
         setContent {
             PostUserTheme {
                 // A surface container using the 'background' color from the theme
@@ -22,7 +43,13 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    Greeting("Android")
+                    val users = userViewModel.users
+                    val updateList = { recreate() }
+                    MainView(users, updateList)
+                    val loading = userViewModel.showLoading
+                    if (loading.value) {
+                        Loading()
+                    }
                 }
             }
         }
@@ -30,14 +57,60 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun Greeting(name: String) {
-    Text(text = "Hello $name!")
+private fun MainView(users: List<User>, updateList: () -> Unit) {
+    Column {
+        val usersFilter = users.toMutableStateList()
+        val search: (value: String) -> Unit = { value ->
+            val result = users.filter { it.name.contains(value, ignoreCase = true) }
+            usersFilter.apply {
+                clear()
+                addAll(result)
+            }
+        }
+        AppBar()
+        FieldSearch(search)
+        Users(users = usersFilter, updateList)
+    }
+}
+
+@Composable
+private fun AppBar() {
+    TopAppBar(
+        title = {
+            Text(text = "Prueba de ingreso")
+        },
+        modifier = Modifier.padding(bottom = multiplierX8)
+    )
+}
+
+@Composable
+private fun FieldSearch(search: (value: String) -> Unit) {
+    var text by remember { mutableStateOf("") }
+    TextField(
+        value = text,
+        onValueChange = {
+            search.invoke(it)
+            text = it
+        },
+        label = {
+            Text(text = "Buscar usuario")
+        },
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = multiplierX8)
+    )
 }
 
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
     PostUserTheme {
-        Greeting("Android")
+        val users = listOf(
+            User(id = 1, name = "Example1", email = "example1@yopmail.com", phone = "3003003031"),
+            User(id = 2, name = "Example2", email = "example2@yopmail.com", phone = "3003003032"),
+            User(id = 3, name = "Example3", email = "example3@yopmail.com", phone = "3003003033"),
+            User(id = 4, name = "Example4", email = "example4@yopmail.com", phone = "3003003034")
+        )
+        MainView(users = users, updateList = {})
     }
 }
