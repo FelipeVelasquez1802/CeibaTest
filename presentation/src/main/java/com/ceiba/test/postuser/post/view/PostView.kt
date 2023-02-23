@@ -1,6 +1,7 @@
 package com.ceiba.test.postuser.post.view
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -29,7 +30,7 @@ fun Posts(user: User, posts: List<Post>) {
 
 @Composable
 private fun Post(post: Post) {
-    Card {
+    Card(modifier = Modifier.fillMaxWidth()) {
         Column(modifier = Modifier.padding(multiplierX4)) {
             val title = post.title
             Title(title = title)
