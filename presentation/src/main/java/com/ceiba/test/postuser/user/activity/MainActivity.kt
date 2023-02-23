@@ -19,6 +19,7 @@ import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.runtime.toMutableStateList
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.ceiba.test.domain.user.model.User
@@ -59,14 +60,9 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun MainView(users: List<User>) {
     Column {
-        val usersFilter = remember {
-            mutableStateListOf<User>().apply {
-                clear()
-                addAll(users)
-            }
-        }
+        val usersFilter = users.toMutableStateList()
         val search: (value: String) -> Unit = { value ->
-            val result = users.filter { it.name.lowercase(Locale.ROOT).contains(value) }
+            val result = users.filter { it.name.contains(value, ignoreCase = true) }
             usersFilter.apply {
                 clear()
                 addAll(result)
