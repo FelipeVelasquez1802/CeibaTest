@@ -22,6 +22,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.ceiba.test.domain.user.model.User
+import com.ceiba.test.postuser.common.view.Loading
 import com.ceiba.test.postuser.ui.theme.PostUserTheme
 import com.ceiba.test.postuser.user.ui.theme.multiplierX8
 import com.ceiba.test.postuser.user.view.Users
@@ -45,6 +46,10 @@ class MainActivity : ComponentActivity() {
                 ) {
                     val users = userViewModel.users
                     MainView(users)
+                    val loading = userViewModel.showLoading
+                    if (loading.value) {
+                        Loading()
+                    }
                 }
             }
         }

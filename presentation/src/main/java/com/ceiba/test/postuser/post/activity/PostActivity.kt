@@ -1,5 +1,6 @@
 package com.ceiba.test.postuser.post.activity
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -20,6 +21,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.ceiba.test.domain.post.model.Post
 import com.ceiba.test.domain.user.model.User
 import com.ceiba.test.postuser.R
+import com.ceiba.test.postuser.common.view.Loading
 import com.ceiba.test.postuser.post.view.Posts
 import com.ceiba.test.postuser.post.viewmodel.PostViewModel
 import com.ceiba.test.postuser.ui.theme.PostUserTheme
@@ -48,6 +50,10 @@ class PostActivity : ComponentActivity() {
                 ) {
                     val posts = postViewModel.post
                     PostView(user, posts)
+                    val showLoading = postViewModel.showLoading
+                    if (showLoading.value) {
+                        Loading()
+                    }
                 }
             }
         }
@@ -63,7 +69,7 @@ class PostActivity : ComponentActivity() {
 
 @Composable
 fun PostView(user: User?, posts: List<Post>) {
-    val activity = LocalContext.current as PostActivity
+    val context = LocalContext.current
     Column {
         val backArrowIcon = painterResource(id = R.drawable.ic_arrow_back_24)
         Icon(
@@ -71,13 +77,22 @@ fun PostView(user: User?, posts: List<Post>) {
             contentDescription = "",
             modifier = Modifier
                 .padding(multiplierX4, top = multiplierX8)
-                .clickable { activity.finish() }
+                .clickable {
+                    close(context)
+                }
         )
         if (user != null) {
             Posts(user = user, posts = posts)
         } else {
             // TODO: Mostrar error
         }
+    }
+}
+
+private fun close(context: Context) {
+    when (context) {
+        is PostActivity -> context.finish()
+        else -> Unit
     }
 }
 
