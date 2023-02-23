@@ -1,4 +1,4 @@
-package com.ceiba.test.postuser.user.dimodule
+package com.ceiba.test.dataaccess.user.dimodule
 
 import com.ceiba.test.dataaccess.user.repository.UserRepositoryImpl
 import com.ceiba.test.domain.user.repository.UserRepository

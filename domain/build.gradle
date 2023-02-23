@@ -44,6 +44,9 @@ android {
 dependencies {
     testImplementation 'junit:junit:4.13.2'
 
+    // Mockito
+    testImplementation "org.mockito.kotlin:mockito-kotlin:$mockito_version"
+
     //Hilt
     implementation "com.google.dagger:hilt-android:$hilt_version"
     kapt  "com.google.dagger:hilt-compiler:$hilt_version"

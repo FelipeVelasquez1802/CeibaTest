@@ -2,11 +2,27 @@ package com.ceiba.test.domain.user.model
 
 import com.ceiba.test.domain.databuilder.user.UserDataBuilder
 import com.ceiba.test.domain.exception.BadEmailException
+import com.ceiba.test.domain.exception.BadIdException
 import com.ceiba.test.domain.exception.EmptyValueException
-import org.junit.Assert.*
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertTrue
+import org.junit.Assert.fail
 import org.junit.Test
 
 internal class UserTest {
+
+    @Test
+    fun `Given the creation of a User When is bad Id Then Return BadIdException`() {
+        val badId = -1
+        val dataBuilder = UserDataBuilder().withId(badId)
+        try {
+            dataBuilder.build()
+            fail("Expected ${BadIdException::class.java.name}")
+        } catch (exception: Exception) {
+            assertTrue(exception is BadIdException)
+        }
+    }
+
     @Test
     fun `Given the creation of a User When is empty Name Then return EmptyValueException`() {
         val emptyName = ""

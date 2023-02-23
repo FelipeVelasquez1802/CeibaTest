@@ -14,6 +14,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -21,21 +22,20 @@ import com.ceiba.test.domain.user.model.User
 import com.ceiba.test.postuser.R
 import com.ceiba.test.postuser.ui.theme.Green700
 import com.ceiba.test.postuser.ui.theme.PostUserTheme
+import com.ceiba.test.postuser.user.router.UserRouter
 import com.ceiba.test.postuser.user.ui.theme.multiplierX12
 import com.ceiba.test.postuser.user.ui.theme.multiplierX4
 import com.ceiba.test.postuser.user.ui.theme.multiplierX8
 
 @Composable
 fun Users(users: List<User>) {
-    LazyColumn {
-        items(users) { user ->
-            User(user = user)
-        }
+    LazyColumn(modifier = Modifier.padding(horizontal = multiplierX8)) {
+        items(users) { user -> User(user = user) }
     }
 }
 
 @Composable
-private fun User(user: User) {
+fun User(user: User, showCallToAction: Boolean = true) {
     Card(
         elevation = multiplierX4,
         modifier = Modifier
@@ -49,7 +49,9 @@ private fun User(user: User) {
             Phone(phone = phone)
             val email = user.email
             Email(email = email)
-            CallToAction(modifier = Modifier.align(Alignment.End))
+            if (showCallToAction) {
+                CallToAction(user = user, modifier = Modifier.align(Alignment.End))
+            }
         }
     }
 }
@@ -88,14 +90,15 @@ private fun Email(email: String) {
 }
 
 @Composable
-private fun CallToAction(modifier: Modifier = Modifier) {
+private fun CallToAction(user: User, modifier: Modifier = Modifier) {
+    val context = LocalContext.current
     val showPost = stringResource(id = R.string.show_post)
     Text(
         text = showPost,
         modifier = modifier
             .padding(vertical = multiplierX12)
             .clickable {
-                // TODO: Agregar una accion
+                UserRouter.goToPost(context, user)
             },
         color = Green700
     )
@@ -106,10 +109,10 @@ private fun CallToAction(modifier: Modifier = Modifier) {
 private fun UserPreview() {
     PostUserTheme {
         val users = listOf(
-            User(name = "Example1", email = "example1@yopmail.com", phone = "3003003031"),
-            User(name = "Example2", email = "example2@yopmail.com", phone = "3003003032"),
-            User(name = "Example3", email = "example3@yopmail.com", phone = "3003003033"),
-            User(name = "Example4", email = "example4@yopmail.com", phone = "3003003034")
+            User(id = 1, name = "Example1", email = "example1@yopmail.com", phone = "3003003031"),
+            User(id = 2, name = "Example2", email = "example2@yopmail.com", phone = "3003003032"),
+            User(id = 3, name = "Example3", email = "example3@yopmail.com", phone = "3003003033"),
+            User(id = 4, name = "Example4", email = "example4@yopmail.com", phone = "3003003034")
         )
         Users(users = users)
     }

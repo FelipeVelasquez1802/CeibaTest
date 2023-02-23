@@ -21,6 +21,7 @@ open class UserViewModel @Inject constructor() : ViewModel() {
     fun executeGetUser() {
         CoroutineScope(IO).launch {
             val result = userService.consultUsers()
+            users.clear()
             users.addAll(result)
         }
     }

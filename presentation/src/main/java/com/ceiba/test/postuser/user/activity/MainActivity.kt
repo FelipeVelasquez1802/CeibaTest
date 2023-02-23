@@ -12,6 +12,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.material.TextField
+import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
@@ -19,7 +20,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.toLowerCase
 import androidx.compose.ui.tooling.preview.Preview
 import com.ceiba.test.domain.user.model.User
 import com.ceiba.test.postuser.ui.theme.PostUserTheme
@@ -53,11 +53,10 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun MainView(users: List<User>) {
-    Column(
-        modifier = Modifier.padding(horizontal = multiplierX8)
-    ) {
+    Column {
         val usersFilter = remember {
             mutableStateListOf<User>().apply {
+                clear()
                 addAll(users)
             }
         }
@@ -68,15 +67,25 @@ fun MainView(users: List<User>) {
                 addAll(result)
             }
         }
+        AppBar()
         FieldSearch(search)
         Users(users = usersFilter)
     }
 }
 
 @Composable
+private fun AppBar() {
+    TopAppBar(
+        title = {
+            Text(text = "Prueba de ingreso")
+        },
+        modifier = Modifier.padding(bottom = multiplierX8)
+    )
+}
+
+@Composable
 private fun FieldSearch(search: (value: String) -> Unit) {
     var text by remember { mutableStateOf("") }
-    println(text)
     TextField(
         value = text,
         onValueChange = {
@@ -86,7 +95,9 @@ private fun FieldSearch(search: (value: String) -> Unit) {
         label = {
             Text(text = "Buscar usuario")
         },
-        modifier = Modifier.fillMaxWidth()
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = multiplierX8)
     )
 }
 
@@ -95,10 +106,10 @@ private fun FieldSearch(search: (value: String) -> Unit) {
 fun DefaultPreview() {
     PostUserTheme {
         val users = listOf(
-            User(name = "Example1", email = "example1@yopmail.com", phone = "3003003031"),
-            User(name = "Example2", email = "example2@yopmail.com", phone = "3003003032"),
-            User(name = "Example3", email = "example3@yopmail.com", phone = "3003003033"),
-            User(name = "Example4", email = "example4@yopmail.com", phone = "3003003034")
+            User(id = 1, name = "Example1", email = "example1@yopmail.com", phone = "3003003031"),
+            User(id = 2, name = "Example2", email = "example2@yopmail.com", phone = "3003003032"),
+            User(id = 3, name = "Example3", email = "example3@yopmail.com", phone = "3003003033"),
+            User(id = 4, name = "Example4", email = "example4@yopmail.com", phone = "3003003034")
         )
         MainView(users = users)
     }
