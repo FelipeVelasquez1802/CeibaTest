@@ -1,5 +1,6 @@
 package com.ceiba.test.postuser.user.view
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -13,12 +14,13 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.ceiba.test.domain.user.model.User
 import com.ceiba.test.postuser.R
+import com.ceiba.test.postuser.ui.theme.Green700
 import com.ceiba.test.postuser.ui.theme.PostUserTheme
-import com.ceiba.test.postuser.ui.theme.Title
 import com.ceiba.test.postuser.user.ui.theme.multiplierX12
 import com.ceiba.test.postuser.user.ui.theme.multiplierX4
 import com.ceiba.test.postuser.user.ui.theme.multiplierX8
@@ -37,7 +39,7 @@ private fun User(user: User) {
     Card(
         elevation = multiplierX4,
         modifier = Modifier
-            .padding(horizontal = multiplierX8, vertical = multiplierX12)
+            .padding(vertical = multiplierX8)
             .fillMaxWidth()
     ) {
         Column(modifier = Modifier.padding(multiplierX4)) {
@@ -57,15 +59,15 @@ private fun FullName(name: String) {
     Text(
         text = name,
         style = MaterialTheme.typography.h4,
-        color = Title
+        color = Green700
     )
 }
 
 @Composable
 private fun Phone(phone: String) {
     Row {
-        val phoneIcon = vectorResource()
-        Icon(imageVector = R.drawable.ic_phone_24, contentDescription = "")
+        val phoneIcon = painterResource(id = R.drawable.ic_phone_24)
+        Icon(painter = phoneIcon, contentDescription = null, tint = Green700)
         Text(
             text = phone,
             style = MaterialTheme.typography.h6
@@ -76,6 +78,8 @@ private fun Phone(phone: String) {
 @Composable
 private fun Email(email: String) {
     Row {
+        val mailIcon = painterResource(id = R.drawable.ic_mail_24)
+        Icon(painter = mailIcon, contentDescription = null, tint = Green700)
         Text(
             text = email,
             style = MaterialTheme.typography.h6
@@ -86,7 +90,15 @@ private fun Email(email: String) {
 @Composable
 private fun CallToAction(modifier: Modifier = Modifier) {
     val showPost = stringResource(id = R.string.show_post)
-    Text(text = showPost, modifier = modifier.padding(vertical = multiplierX12))
+    Text(
+        text = showPost,
+        modifier = modifier
+            .padding(vertical = multiplierX12)
+            .clickable {
+                // TODO: Agregar una accion
+            },
+        color = Green700
+    )
 }
 
 @Preview(showBackground = true)
