@@ -15,6 +15,9 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
+
+
+        buildConfigField "int", "VERSION_DATABASE", "${project.getProperty("VERSION_DATABASE")}"
     }
 
     buildTypes {
@@ -37,6 +40,7 @@ android {
         }
         prod {
             dimension 'ceiba'
+            buildConfigField "String", "HOSTNAME", "\"${project.getProperty("HOSTNAME")}\""
         }
     }
 }

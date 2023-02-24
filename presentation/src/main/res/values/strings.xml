@@ -1,5 +1,10 @@
 <resources>
     <string name="app_name">PostUser</string>
+    <string name="title_main">Prueba de ingreso</string>
     <string name="show_post">VER PUBLICACIONES</string>
-    <string name="title_activity_post">PostActivity</string>
+    <string name="title_activity_post">PostActivity</string>\
+    <string name="search_user">Buscar usuario</string>
+    <string name="loading">Cargando la informacion…</string>
+    <string name="empty_list">List is Empty</string>
+    <string name="reload">Reoad</string>
 </resources>

@@ -13,11 +13,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import com.ceiba.test.postuser.R
 import com.ceiba.test.postuser.ui.theme.BackgroundCard
 import com.ceiba.test.postuser.ui.theme.Green700
 import com.ceiba.test.postuser.ui.theme.PostUserTheme
-import com.ceiba.test.postuser.user.ui.theme.multiplierX12
+import com.ceiba.test.postuser.ui.theme.multiplierX12
 
 @Composable
 fun Loading() {
@@ -34,8 +36,9 @@ fun Loading() {
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
+            val textLoading = stringResource(id = R.string.loading)
             Text(
-                text = "Loading...",
+                text = textLoading,
                 style = MaterialTheme.typography.h6,
                 color = Green700,
                 modifier = Modifier.padding(
