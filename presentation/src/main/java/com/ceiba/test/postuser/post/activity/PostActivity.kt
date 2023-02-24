@@ -110,6 +110,7 @@ fun DefaultPreview2() {
         val posts = listOf(
             Post(
                 id = 1,
+                userId = user.id,
                 title = "sunt aut facere repellat provident occaecati excepturi optio reprehenderit",
                 body = """
                 quia et suscipit
