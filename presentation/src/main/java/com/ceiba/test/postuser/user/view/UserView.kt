@@ -20,6 +20,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.ceiba.test.domain.user.model.User
 import com.ceiba.test.postuser.R
+import com.ceiba.test.postuser.common.view.EmptyList
 import com.ceiba.test.postuser.ui.theme.Green700
 import com.ceiba.test.postuser.ui.theme.PostUserTheme
 import com.ceiba.test.postuser.user.router.UserRouter
@@ -28,9 +29,13 @@ import com.ceiba.test.postuser.user.ui.theme.multiplierX4
 import com.ceiba.test.postuser.user.ui.theme.multiplierX8
 
 @Composable
-fun Users(users: List<User>) {
-    LazyColumn(modifier = Modifier.padding(horizontal = multiplierX8)) {
-        items(users) { user -> User(user = user) }
+fun Users(users: List<User>, updateList: () -> Unit = {}) {
+    if (users.isEmpty()) {
+        EmptyList(callToAction = updateList)
+    } else {
+        LazyColumn(modifier = Modifier.padding(horizontal = multiplierX8)) {
+            items(users) { user -> User(user = user) }
+        }
     }
 }
 

@@ -15,7 +15,6 @@ import androidx.compose.material.TextField
 import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -29,7 +28,6 @@ import com.ceiba.test.postuser.user.ui.theme.multiplierX8
 import com.ceiba.test.postuser.user.view.Users
 import com.ceiba.test.postuser.user.viewmodel.UserViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import java.util.Locale
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -46,7 +44,8 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colors.background
                 ) {
                     val users = userViewModel.users
-                    MainView(users)
+                    val updateList = { recreate() }
+                    MainView(users, updateList)
                     val loading = userViewModel.showLoading
                     if (loading.value) {
                         Loading()
@@ -58,7 +57,7 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun MainView(users: List<User>) {
+private fun MainView(users: List<User>, updateList: () -> Unit) {
     Column {
         val usersFilter = users.toMutableStateList()
         val search: (value: String) -> Unit = { value ->
@@ -70,7 +69,7 @@ fun MainView(users: List<User>) {
         }
         AppBar()
         FieldSearch(search)
-        Users(users = usersFilter)
+        Users(users = usersFilter, updateList)
     }
 }
 
@@ -112,6 +111,6 @@ fun DefaultPreview() {
             User(id = 3, name = "Example3", email = "example3@yopmail.com", phone = "3003003033"),
             User(id = 4, name = "Example4", email = "example4@yopmail.com", phone = "3003003034")
         )
-        MainView(users = users)
+        MainView(users = users, updateList = {})
     }
 }

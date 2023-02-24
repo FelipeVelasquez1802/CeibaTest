@@ -49,7 +49,8 @@ class PostActivity : ComponentActivity() {
                     color = MaterialTheme.colors.background
                 ) {
                     val posts = postViewModel.post
-                    PostView(user, posts)
+                    val updateList = { recreate() }
+                    PostView(user, posts, updateList)
                     val showLoading = postViewModel.showLoading
                     if (showLoading.value) {
                         Loading()
@@ -68,7 +69,7 @@ class PostActivity : ComponentActivity() {
 }
 
 @Composable
-fun PostView(user: User?, posts: List<Post>) {
+fun PostView(user: User?, posts: List<Post>, updateList: () -> Unit) {
     val context = LocalContext.current
     Column {
         val backArrowIcon = painterResource(id = R.drawable.ic_arrow_back_24)
@@ -82,7 +83,7 @@ fun PostView(user: User?, posts: List<Post>) {
                 }
         )
         if (user != null) {
-            Posts(user = user, posts = posts)
+            Posts(user = user, posts = posts, updateList)
         } else {
             // TODO: Mostrar error
         }
@@ -109,6 +110,7 @@ fun DefaultPreview2() {
         val posts = listOf(
             Post(
                 id = 1,
+                userId = user.id,
                 title = "sunt aut facere repellat provident occaecati excepturi optio reprehenderit",
                 body = """
                 quia et suscipit
@@ -118,6 +120,6 @@ fun DefaultPreview2() {
             """.trimIndent()
             )
         )
-        PostView(user, posts)
+        PostView(user, posts, updateList = {})
     }
 }
