@@ -10,7 +10,7 @@ import dagger.hilt.android.components.ViewModelComponent
 
 @Module
 @InstallIn(ViewModelComponent::class)
-class PostModule {
+internal class PostModule {
     @Provides
     fun providePostRepository(database: DatabaseConfig): PostRepository =
         PostRepositoryImpl(database.postDao())

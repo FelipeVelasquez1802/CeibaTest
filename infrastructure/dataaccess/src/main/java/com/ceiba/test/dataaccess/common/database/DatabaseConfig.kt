@@ -8,7 +8,7 @@ import com.ceiba.test.dataaccess.user.database.dao.UserDao
 import com.ceiba.test.dataaccess.user.database.entity.UserEntity
 
 @Database(entities = [UserEntity::class, PostEntity::class], version = 2)
-abstract class DatabaseConfig : RoomDatabase() {
+internal abstract class DatabaseConfig : RoomDatabase() {
     abstract fun usersDao(): UserDao
     abstract fun postDao(): PostDao
 }

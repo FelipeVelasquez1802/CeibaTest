@@ -8,7 +8,7 @@ import com.ceiba.test.domain.user.model.User
 import com.ceiba.test.domain.user.repository.UserRepository
 import javax.inject.Inject
 
-class UserRepositoryImpl @Inject constructor(private val userDao: UserDao) : UserRepository {
+internal class UserRepositoryImpl @Inject constructor(private val userDao: UserDao) : UserRepository {
     override fun select(): List<User> {
         var usersEntity = userDao.getAll()
         if (usersEntity.isEmpty()) {

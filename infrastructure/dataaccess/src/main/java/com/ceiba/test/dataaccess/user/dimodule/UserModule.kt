@@ -10,7 +10,7 @@ import dagger.hilt.android.components.ViewModelComponent
 
 @Module
 @InstallIn(ViewModelComponent::class)
-class UserModule {
+internal class UserModule {
 
     @Provides
     fun provideUserRepository(database: DatabaseConfig): UserRepository =
