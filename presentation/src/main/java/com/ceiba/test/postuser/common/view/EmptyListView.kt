@@ -12,9 +12,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import com.ceiba.test.postuser.R
 import com.ceiba.test.postuser.ui.theme.PostUserTheme
-import com.ceiba.test.postuser.user.ui.theme.multiplierX8
+import com.ceiba.test.postuser.ui.theme.multiplierX8
 
 @Composable
 fun EmptyList(callToAction: () -> Unit = {}) {
@@ -25,16 +27,20 @@ fun EmptyList(callToAction: () -> Unit = {}) {
             .padding(multiplierX8),
         verticalArrangement = Arrangement.Center
     ) {
+        val emptyListText = stringResource(id = R.string.empty_list)
         Text(
-            text = "List is Empty",
+            text = emptyListText,
             style = MaterialTheme.typography.h4,
-            modifier = Modifier.align(Alignment.CenterHorizontally).testTag("titleEmptyList")
+            modifier = Modifier
+                .align(Alignment.CenterHorizontally)
+                .testTag("titleEmptyList")
         )
+        val reloadText = stringResource(id = R.string.reload)
         Button(
             onClick = callToAction,
             modifier = Modifier.align(Alignment.CenterHorizontally)
         ) {
-            Text(text = "Reload")
+            Text(text = reloadText)
         }
     }
 }

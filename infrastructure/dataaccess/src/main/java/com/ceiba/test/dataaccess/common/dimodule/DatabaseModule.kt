@@ -15,7 +15,9 @@ import javax.inject.Singleton
 internal object DatabaseModule {
     @Singleton
     @Provides
-    fun provideDatabase(@ApplicationContext context: Context): DatabaseConfig =
-        Room.databaseBuilder(context, DatabaseConfig::class.java, "ceiba_test")
+    fun provideDatabase(@ApplicationContext context: Context): DatabaseConfig {
+        val databaseName = "ceiba_test"
+        return Room.databaseBuilder(context, DatabaseConfig::class.java, databaseName)
             .fallbackToDestructiveMigration().build()
+    }
 }

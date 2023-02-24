@@ -23,6 +23,18 @@ class PostTest {
     }
 
     @Test
+    fun `Given the creation of a Post When is bad UserId Then return BadIdException`() {
+        val badUserId = -1
+        val dataBuilder = PostDataBuilder().withId(badUserId)
+        try {
+            dataBuilder.build()
+            fail("Expected ${BadIdException::class.java.name}")
+        } catch (exception: Exception) {
+            assertTrue(exception is BadIdException)
+        }
+    }
+
+    @Test
     fun `Given the creation of a Post When is empty Title Then return EmptyValueException`() {
         val emptyTitle = ""
         val dataBuilder = PostDataBuilder().withTitle(emptyTitle)

@@ -23,7 +23,7 @@ class ConfigApi {
             }
         private val retrofit: Retrofit = Retrofit
             .Builder()
-            .baseUrl("https://jsonplaceholder.typicode.com") // TODO: Cambiarlo por una version en el gradle
+            .baseUrl(BuildConfig.HOSTNAME)
             .addConverterFactory(GsonConverterFactory.create())
             .client(httpClient.build())
             .build()

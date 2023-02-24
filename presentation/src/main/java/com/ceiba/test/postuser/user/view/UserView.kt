@@ -25,9 +25,9 @@ import com.ceiba.test.postuser.common.view.EmptyList
 import com.ceiba.test.postuser.ui.theme.Green700
 import com.ceiba.test.postuser.ui.theme.PostUserTheme
 import com.ceiba.test.postuser.user.router.UserRouter
-import com.ceiba.test.postuser.user.ui.theme.multiplierX12
-import com.ceiba.test.postuser.user.ui.theme.multiplierX4
-import com.ceiba.test.postuser.user.ui.theme.multiplierX8
+import com.ceiba.test.postuser.ui.theme.multiplierX12
+import com.ceiba.test.postuser.ui.theme.multiplierX4
+import com.ceiba.test.postuser.ui.theme.multiplierX8
 
 @Composable
 fun Users(users: List<User>, updateList: () -> Unit = {}) {
