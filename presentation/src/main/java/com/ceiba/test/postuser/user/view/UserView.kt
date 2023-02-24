@@ -15,6 +15,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -33,7 +34,7 @@ fun Users(users: List<User>, updateList: () -> Unit = {}) {
     if (users.isEmpty()) {
         EmptyList(callToAction = updateList)
     } else {
-        LazyColumn(modifier = Modifier.padding(horizontal = multiplierX8)) {
+        LazyColumn(modifier = Modifier.padding(horizontal = multiplierX8).testTag("users")) {
             items(users) { user -> User(user = user) }
         }
     }
@@ -66,7 +67,8 @@ private fun FullName(name: String) {
     Text(
         text = name,
         style = MaterialTheme.typography.h4,
-        color = Green700
+        color = Green700,
+        modifier = Modifier.testTag("fullName")
     )
 }
 
