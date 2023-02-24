@@ -73,14 +73,17 @@ dependencies {
     implementation 'androidx.compose.material:material:1.2.0'
     implementation project(path: ':infrastructure:dataaccess')
     implementation project(path: ':domain')
-    testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
     androidTestImplementation "androidx.compose.ui:ui-test-junit4:$compose_ui_version"
     debugImplementation "androidx.compose.ui:ui-tooling:$compose_ui_version"
     debugImplementation "androidx.compose.ui:ui-test-manifest:$compose_ui_version"
 
-    //Hilt
+    // Hilt
     implementation "com.google.dagger:hilt-android:$hilt_version"
     kapt  "com.google.dagger:hilt-compiler:$hilt_version"
+
+    // Espresso
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+    androidTestImplementation 'androidx.test:runner:1.1.0'
+    androidTestImplementation 'androidx.test:rules:1.1.0'
 }

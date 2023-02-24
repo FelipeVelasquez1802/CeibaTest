@@ -11,6 +11,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.tooling.preview.Preview
 import com.ceiba.test.postuser.ui.theme.PostUserTheme
 import com.ceiba.test.postuser.user.ui.theme.multiplierX8
@@ -27,7 +28,7 @@ fun EmptyList(callToAction: () -> Unit = {}) {
         Text(
             text = "List is Empty",
             style = MaterialTheme.typography.h4,
-            modifier = Modifier.align(Alignment.CenterHorizontally)
+            modifier = Modifier.align(Alignment.CenterHorizontally).testTag("titleEmptyList")
         )
         Button(
             onClick = callToAction,

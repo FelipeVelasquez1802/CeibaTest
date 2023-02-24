@@ -20,6 +20,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.toMutableStateList
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.tooling.preview.Preview
 import com.ceiba.test.domain.user.model.User
 import com.ceiba.test.postuser.common.view.Loading
@@ -57,7 +58,7 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-private fun MainView(users: List<User>, updateList: () -> Unit) {
+ fun MainView(users: List<User>, updateList: () -> Unit) {
     Column {
         val usersFilter = users.toMutableStateList()
         val search: (value: String) -> Unit = { value ->
@@ -98,6 +99,7 @@ private fun FieldSearch(search: (value: String) -> Unit) {
         modifier = Modifier
             .fillMaxWidth()
             .padding(horizontal = multiplierX8)
+            .testTag("filter")
     )
 }
 
