@@ -16,7 +16,7 @@ import com.ceiba.test.domain.user.model.User
 import com.ceiba.test.postuser.common.view.EmptyList
 import com.ceiba.test.postuser.ui.theme.Green700
 import com.ceiba.test.postuser.ui.theme.PostUserTheme
-import com.ceiba.test.postuser.user.ui.theme.multiplierX4
+import com.ceiba.test.postuser.ui.theme.multiplierX4
 import com.ceiba.test.postuser.user.view.User
 
 @Composable

@@ -4,6 +4,7 @@ import com.ceiba.test.domain.post.model.Post
 
 class PostDataBuilder {
     private var id = 1
+    private var userId = 1
     private var title = "sunt aut facere repellat provident occaecati excepturi optio reprehenderit"
     private var body = """
         quia et suscipit
@@ -18,5 +19,5 @@ class PostDataBuilder {
 
     fun withBody(body: String): PostDataBuilder = this.apply { this.body = body }
 
-    fun build(): Post = Post(id, title, body)
+    fun build(): Post = Post(id, userId, title, body)
 }

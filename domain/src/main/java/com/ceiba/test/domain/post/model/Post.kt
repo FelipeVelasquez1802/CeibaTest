@@ -10,12 +10,19 @@ class Post(val id: Int, val userId: Int, val title: String, val body: String) {
 
     private fun validations() {
         validateId()
+        validateUserId()
         validateTitle()
         validateBody()
     }
 
     private fun validateId() {
         if (id <= 0) {
+            throw BadIdException()
+        }
+    }
+
+    private fun validateUserId() {
+        if (userId <= 0) {
             throw BadIdException()
         }
     }

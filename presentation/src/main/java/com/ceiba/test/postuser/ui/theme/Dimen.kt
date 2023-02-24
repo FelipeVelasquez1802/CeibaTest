@@ -1,4 +1,4 @@
-package com.ceiba.test.postuser.user.ui.theme
+package com.ceiba.test.postuser.ui.theme
 
 import androidx.compose.ui.unit.dp
 

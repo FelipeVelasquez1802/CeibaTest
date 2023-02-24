@@ -21,6 +21,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.ceiba.test.domain.post.model.Post
 import com.ceiba.test.domain.user.model.User
 import com.ceiba.test.postuser.R
+import com.ceiba.test.postuser.common.view.EmptyList
 import com.ceiba.test.postuser.common.view.Loading
 import com.ceiba.test.postuser.post.view.Posts
 import com.ceiba.test.postuser.post.viewmodel.PostViewModel
@@ -28,8 +29,8 @@ import com.ceiba.test.postuser.ui.theme.PostUserTheme
 import com.ceiba.test.postuser.user.mapper.UserMapper
 import com.ceiba.test.postuser.user.model.KeyField
 import com.ceiba.test.postuser.user.model.UserView
-import com.ceiba.test.postuser.user.ui.theme.multiplierX4
-import com.ceiba.test.postuser.user.ui.theme.multiplierX8
+import com.ceiba.test.postuser.ui.theme.multiplierX4
+import com.ceiba.test.postuser.ui.theme.multiplierX8
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -85,7 +86,7 @@ fun PostView(user: User?, posts: List<Post>, updateList: () -> Unit) {
         if (user != null) {
             Posts(user = user, posts = posts, updateList)
         } else {
-            // TODO: Mostrar error
+            EmptyList()
         }
     }
 }

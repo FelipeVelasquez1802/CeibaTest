@@ -21,11 +21,13 @@ import androidx.compose.runtime.setValue
 import androidx.compose.runtime.toMutableStateList
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.ceiba.test.domain.user.model.User
+import com.ceiba.test.postuser.R
 import com.ceiba.test.postuser.common.view.Loading
 import com.ceiba.test.postuser.ui.theme.PostUserTheme
-import com.ceiba.test.postuser.user.ui.theme.multiplierX8
+import com.ceiba.test.postuser.ui.theme.multiplierX8
 import com.ceiba.test.postuser.user.view.Users
 import com.ceiba.test.postuser.user.viewmodel.UserViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -76,9 +78,10 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 private fun AppBar() {
+    val title = stringResource(id = R.string.title_main)
     TopAppBar(
         title = {
-            Text(text = "Prueba de ingreso")
+            Text(text = title)
         },
         modifier = Modifier.padding(bottom = multiplierX8)
     )
@@ -94,7 +97,8 @@ private fun FieldSearch(search: (value: String) -> Unit) {
             text = it
         },
         label = {
-            Text(text = "Buscar usuario")
+            val text = stringResource(id = R.string.search_user)
+            Text(text = text)
         },
         modifier = Modifier
             .fillMaxWidth()
