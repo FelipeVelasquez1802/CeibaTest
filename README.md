@@ -1,6 +1,6 @@
 # CeibaTest
 
-Este proyecto es una solucion de una prueba planteada por Empowerment Labs.
+Este proyecto es una solucion de una prueba planteada por Ceiba Software House.
 
 ## ¿Como se realiza la solucion del Test?
 
